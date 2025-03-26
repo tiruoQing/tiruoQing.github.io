@@ -1,3 +1,7 @@
 theme: jekyll-theme-minimal
-title: 我的博客
-description: 欢迎访问我的个人博客！
+title: TiruoTech
+description: Welcome!
+collections:
+  posts:
+    sort_by: date
+    reverse: true
