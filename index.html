@@ -1,3 +1,6 @@
+---
+layout: default
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,5 +9,11 @@
 <body>
     <h1>Welcome！</h1>
     <p>For first Page</p>
+    <h2>博客文章</h2>
+    <ul>
+    {% for post in site.posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}</li>
+    {% endfor %}
+    </ul>
 </body>
 </html>
