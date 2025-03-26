@@ -1,6 +1,14 @@
 h1 {
-    color: #2c3e50;
+    color: #2c3e50; /* 深蓝色标题 */
 }
 ul {
-    font-size: 18px;
+    font-size: 18px; /* 文章列表字体大小 */
+    list-style-type: square; /* 列表项用方形标记 */
+}
+a {
+    color: #1abc9c; /* 链接颜色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+a:hover {
+    text-decoration: underline; /* 鼠标悬停时加下划线 */
 }
