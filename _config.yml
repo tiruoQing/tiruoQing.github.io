@@ -22,7 +22,7 @@ footer-links:
   zhihu: 
   email: 2848851500@qq.com
   facebook:
-  github: https://github.com/tiruoQing
+  github: tiruoQing
   rss: # just type anything here for a working RSS icon
   twitter: 
   youtube:
@@ -63,6 +63,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+
 
 
 
