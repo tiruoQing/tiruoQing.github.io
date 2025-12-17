@@ -1,9 +1,0 @@
-title: TiruoTech
-description: Power Electronics & Control Notes
-markdown: kramdown
-kramdown:
-  input: GFM
-collections:
-  posts:
-    sort_by: date
-    reverse: true
