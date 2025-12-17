@@ -1,4 +1,4 @@
-name: "tiruoqing's blog"
+name: "tiruo's blog"
 description: "天若的个人技术博客"
 
 
@@ -63,6 +63,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+
 
 
 
