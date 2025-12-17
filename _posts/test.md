@@ -1,0 +1,62 @@
+---
+layout: post
+title: 测试文件
+date: 2025-12-17
+tags:
+  - test
+comments: true
+author: tiruo
+toc: true
+---
+
+> 本文件为测试显示是否正常使用
+
+<!-- more -->
+
+公式块测试: 
+
+$$
+y = ax + b
+$$
+
+行级公式测试: $y = kx$
+
+---
+
+代码块测试: 
+
+```cpp
+#include <iostream>
+int main()
+{
+	return 0;
+}
+```
+
+行级代码测试: `#include`
+
+---
+
+mermaid测试: 
+
+```mermaid
+graph TD
+    A[Enter Chart Definition] --> B(Preview)
+    B --> C{decide}
+    C --> D[Keep]
+    C --> E[Edit Definition]
+    E --> B
+    D --> F[Save Image and Code]
+    F --> B
+```
+
+---
+
+表格测试: 
+
+| 1   | 2   |
+| --- | --- |
+| 3   | 4   |
+|     |     |
+
+
