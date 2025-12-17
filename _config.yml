@@ -1,5 +1,8 @@
 title: TiruoTech
-description: Welcome!
+description: Power Electronics & Control Notes
+markdown: kramdown
+kramdown:
+  input: GFM
 collections:
   posts:
     sort_by: date
