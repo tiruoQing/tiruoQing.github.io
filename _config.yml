@@ -3,8 +3,8 @@ description: "天若的个人技术博客"
 
 
 
-avatar: https://sgarifool.github.io/assets/122504966.png
-favicon: https://sgarifool.github.io/assets/122504966.ico
+avatar: https://tiruoqing.github.io//assets/122504966.png
+favicon: https://tiruoqing.github.io//assets/122504966.ico
 
 navigation:
   - name: 首页
@@ -63,6 +63,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+
 
 
 
