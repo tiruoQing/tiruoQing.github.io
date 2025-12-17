@@ -1,8 +1,8 @@
 name: "tiruoqing's blog"
 description: "天若的个人技术博客"
 
-avatar: https://avatars.githubusercontent.com/u/122504966?v=4
-favicon: https://github.com/tiruoQing/tiruoQing.github.io/blob/6713c7f7145201ea7c9eb7db2936643126c32688/assets/122504966.ico
+avatar: https://github.com/tiruoQing/tiruoQing.github.io/blob/main/assets/122504966.jfif
+favicon: https://github.com/tiruoQing/tiruoQing.github.io/blob/main/assets/122504966.ico
 
 navigation:
   - name: 首页
@@ -61,6 +61,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+
 
 
 
