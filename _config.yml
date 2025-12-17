@@ -1,7 +1,7 @@
-name: "SgAriFool's blog"
-description: "爱斯基双钩的个人技术博客"
+name: "tiruoqing's blog"
+description: "天若的个人技术博客"
 
-avatar: https://sgarifool.github.io/assets/aliPS.png
+avatar: https://avatars.githubusercontent.com/u/122504966?v=4
 favicon: https://sgarifool.github.io/assets/ali.ico
 
 navigation:
@@ -12,22 +12,22 @@ navigation:
   - name: 分类
     url: /tags
 
-paginate: 8
+paginate: 15
 
 excerpt_separator: <!-- more -->
 
 footer-links:
   zhihu: 
-  email: 2987254017@qq.com
+  email: 2848851500@qq.com
   facebook:
-  github: 
+  github: https://github.com/tiruoQing
   rss: # just type anything here for a working RSS icon
   twitter: 
   youtube:
 
-footer-text: Copyright (c) 2025 SgAriFool
+footer-text: Copyright (c) 2025 tiruo
 
-url: https://sgarifool.github.io
+url: https://github.com/tiruoQing
 
 permalink: /:title/
 paginate_path: /page:num/
@@ -61,4 +61,5 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+
 
