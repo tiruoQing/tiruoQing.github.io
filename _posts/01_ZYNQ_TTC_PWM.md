@@ -1,0 +1,166 @@
+---
+layout: post
+title: 01_PYNQ_TTC_PWM
+date: 2026-01-16
+tags:
+  - FPGA
+comments: true
+author: tiruo
+toc: true
+---
+
+# 01_PYNQ_TTC_PWM
+
+> 本文为实现ZYNQ平台的TTC的PWM输出测试,测试为LED闪烁
+> 关于TTC的介绍可以查看 : https://www.cnblogs.com/tiruo/p/18517407
+> 后于的zynq工程建立等操作步骤不再具体演示,仅粘贴关键步骤
+
+### 1. VIVADO部分操作
+##### 1.1. 新建工程
+![image.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image.png)
+![image-1.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-1.png)
+![image-2.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-2.png)
+![image-3.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-3.png)
+![image-4.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-4.png)
+
+#### 1.2. 创建Block Design
+![image-5.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-5.png)
+![image-6.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-6.png)
+![image-7.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-7.png)
+![image-8.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-8.png)
+![image-9.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-9.png)
+![image-10.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-10.png)
+![image-11.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-11.png)
+![image-13.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-13.png)
+![image-12.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-12.png)
+![image-14.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-14.png)
+![image-15.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-15.png)
+![image-16.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-16.png)
+![image-17.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-17.png)
+！！！不勾选 Apply Board Preset
+![image-18.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-18.png)
+![image-19.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-19.png)
+![image-20.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-20.png)
+![image-21.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-21.png)
+![image-22.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-22.png)
+
+#### 1.3 综合、管脚约束、布局、生成bit流
+1. 点击 : run Synthesis进行综合
+
+2. 点击 : open Elaborated Design
+
+3. 菜单栏 windows -> I/O Ports
+![image-23.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-23.png)
+
+4. 保存约束文件,文件名自取
+
+5. 点击 : run Implemention
+
+6. 点击 : Generate Bitstream
+![image-24.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-24.png)
+
+### 2. SDK部分操作
+1. 点击 : File -> Launch SDK
+![image-25.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-25.png)
+![image-26.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-26.png)
+
+2. 选择Hello World模板
+
+3. 将helloworld.c文件替换为最下方代码
+4. 运行
+![image-27.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-27.png)
+
+5. 板子LED以5Hz频率进行闪烁
+![image-29.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-29.png)
+6. 串口接收到板子信息
+![image-28.png](https://raw.githubusercontent.com/tiruoQing/tiruoQing.github.io/main/assets/imgs/image-28.png)
+
+### 3. 代码
+```C
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xttcps.h"
+#include "xparameters.h"
+
+
+#define TTC00DeviceId	XPAR_PS7_TTC_0_DEVICE_ID
+
+#define TTC0Freq		5
+
+/*
+interval mode : 当计数器值达到interval，则清零重新计数
+match mode ： 当计数器值匹配到XTtcPs_SetMatchValue（）所设定的值，则pwm翻转
+XTTCPS_OPTION_WAVE_POLARITY ： 不使用此参数，波形从高电平翻转，使用此参数从低电平翻转
+*/
+#define TTC_Option		XTTCPS_OPTION_INTERVAL_MODE | XTTCPS_OPTION_MATCH_MODE |XTTCPS_OPTION_WAVE_POLARITY
+
+// 仅例化了一个ttc，因此只有WAVE0能正常输出，需要控制三个pwm则需要配置三个
+XTtcPs	ttc0Inst;
+
+
+// 初始化ttc及中断
+static void  TTC_Int_Init(u16 ttcDeviceId, XTtcPs* ttcInstancePtr, u32 Freq);
+
+
+
+int main()
+{
+    init_platform();
+
+    TTC_Int_Init(TTC00DeviceId, &ttc0Inst, TTC0Freq);
+
+    XTtcPs_Start(&ttc0Inst);
+
+    u16 interval= XTtcPs_GetInterval(&ttc0Inst);
+    printf("ttc0 interval is : %d \n", interval);
+
+    u8 prescale = XTtcPs_GetPrescaler(&ttc0Inst);
+    printf("ttc0 prescale is : %d \n", prescale);
+
+    printf("ttc0 led flash!\n");
+
+    while(1){
+        
+    }
+    cleanup_platform();
+    return 0;
+}
+
+
+static void  TTC_Int_Init(u16 ttcDeviceId, XTtcPs* ttcInstancePtr, u32 Freq){
+	XInterval Interval;
+	u8 Prescaler;
+	s32 Status;
+	XTtcPs_Config* ttcConfPtr;
+
+	ttcConfPtr = XTtcPs_LookupConfig(ttcDeviceId);
+
+
+	Status = XTtcPs_CfgInitialize(ttcInstancePtr, ttcConfPtr, ttcConfPtr->BaseAddress);
+	if(XST_SUCCESS == Status)
+		printf("ttc0 config initialize ok!!!\n");
+	else
+		printf("ttc0 config initialize failure!!!\n");
+	XTtcPs_Stop(ttcInstancePtr);
+
+
+	Status = XTtcPs_SetOptions(ttcInstancePtr, TTC_Option);
+	if(XST_SUCCESS == Status)
+			printf("ttc0 setoption ok!!!\n");
+		else
+			printf("ttc0 setoption failure!!!\n");
+
+	XTtcPs_CalcIntervalFromFreq(ttcInstancePtr, Freq, &Interval, &Prescaler);
+
+	XTtcPs_SetPrescaler(ttcInstancePtr, Prescaler);
+
+	XTtcPs_SetInterval(ttcInstancePtr, Interval);
+
+	XMatchRegValue value = 0.5 * (Interval + 1);
+
+	XTtcPs_SetMatchValue(ttcInstancePtr, 0, value);
+
+	printf("ttc config ok!!!\n");
+}
+```
